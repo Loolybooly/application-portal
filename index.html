@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Application Portal</title>
+    
+    <!-- Discord Embed Meta Tags -->
+    <meta property="og:title" content="Application Portal">
+    <meta property="og:description" content="Submit staff and promotion applications for our The Vault Scripts">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Feforms.com%2Fimages%2F2018%2F03%2FEmployment-Job-Application.png&f=1&nofb=1&ipt=df990e23d9d626a851e0723a444539bda36a21529f5bde5448236ea55c78cf50">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Application Portal">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .landing-container {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a5568;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .app-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .app-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .app-button:active {
+            transform: translateY(-1px);
+        }
+
+        .staff-btn {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+        }
+
+        .staff-btn:hover {
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+        }
+
+        .promotion-btn {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+        }
+
+        .promotion-btn:hover {
+            box-shadow: 0 8px 25px rgba(237, 137, 54, 0.4);
+        }
+
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .description {
+            font-size: 14px;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+            font-size: 1.1em;
+        }
+
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f7fafc;
+            color: #2d3748;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            background: #ffffff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .promotion-submit-btn {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+        }
+
+        .promotion-submit-btn:hover {
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+        }
+
+        #status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .status-success {
+            background: #c6f6d5;
+            color: #22543d;
+            border: 2px solid #9ae6b4;
+        }
+
+        .status-error {
+            background: #fed7d7;
+            color: #742a2a;
+            border: 2px solid #feb2b2;
+        }
+
+        .status-loading {
+            background: #fef5e7;
+            color: #744210;
+            border: 2px solid #fbd38d;
+        }
+
+        .header-decoration {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-decoration::before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0 auto 20px;
+            border-radius: 2px;
+        }
+
+        .promotion-header::before {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+        }
+
+        .form-section {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .promotion-form-section {
+            border-left: 4px solid #ed8936;
+        }
+
+        .required-field::after {
+            content: ' *';
+            color: #e53e3e;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #718096 0%, #4a5568 100%);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(113, 128, 150, 0.3);
+        }
+
+        .notice {
+            background: #fef5e7;
+            border: 2px solid #fbd38d;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #744210;
+            font-weight: 600;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 0;
+                padding: 20px;
+                border-radius: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 20px;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .app-button {
+                padding: 18px 25px;
+                font-size: 16px;
+            }
+            
+            .form-section {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .form-group {
+                margin-bottom: 20px;
+            }
+            
+            label {
+                font-size: 1em;
+                margin-bottom: 6px;
+            }
+            
+            input[type="text"], input[type="number"], textarea, select {
+                font-size: 16px;
+                padding: 10px 12px;
+                border-radius: 8px;
+            }
+            
+            textarea {
+                min-height: 80px;
+            }
+            
+            .submit-btn {
+                padding: 12px 20px;
+                font-size: 16px;
+            }
+            
+            #status {
+                padding: 12px;
+                font-size: 14px;
+                margin-top: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .app-button {
+                padding: 16px 20px;
+                font-size: 15px;
+            }
+            
+            .form-section {
+                padding: 12px;
+            }
+            
+            .form-group {
+                margin-bottom: 15px;
+            }
+            
+            input[type="text"], input[type="number"], textarea, select {
+                padding: 8px 10px;
+            }
+            
+            .submit-btn {
+                padding: 10px 16px;
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Landing Page -->
+    <div id="landing-page" class="page active">
+        <div class="container landing-container">
+            <h1>Application Portal</h1>
+            <p class="subtitle">Choose the type of application you'd like to submit</p>
+            
+            <div class="button-container">
+                <button onclick="showPage('staff-page')" class="app-button staff-btn">
+                    <span class="icon"></span>
+                    Staff Application
+                    <div class="description">Apply to become a staff member</div>
+                </button>
+                
+                <button onclick="showPage('promotion-page')" class="app-button promotion-btn">
+                    <span class="icon"></span>
+                    Promotion Application
+                    <div class="description">Current staff members seeking promotion</div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Staff Application Page -->
+    <div id="staff-page" class="page">
+        <div class="container">
+            <button onclick="showPage('landing-page')" class="back-btn">Back to Portal</button>
+            
+            <div class="header-decoration">
+                <h1>Staff Application</h1>
+            </div>
+
+            <form id="staffForm">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="staff-dcn" class="required-field">Discord Username</label>
+                        <input type="text" id="staff-dcn" placeholder="username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="staff-timezone" class="required-field">Timezone</label>
+                        <input type="text" id="staff-timezone" placeholder="EST, PST, GMT, etc." required>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="staff-experience" class="required-field">Do you have any previous moderation experience? If yes, please describe:</label>
+                        <textarea id="staff-experience" placeholder="Describe your experience with moderation, admin roles, or community management..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="staff-motivation" class="required-field">Why do you want to become a staff member on this server?</label>
+                        <textarea id="staff-motivation" placeholder="Explain your motivation and what drives you to help this community..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="staff-qualities" class="required-field">What qualities do you think make a good staff member?</label>
+                        <textarea id="staff-qualities" placeholder="Patience, fairness, communication skills, etc..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="staff-scenario" class="required-field">Scenario: A user is being toxic in chat but hasn't broken any rules yet. How would you handle this situation?</label>
+                        <textarea id="staff-scenario" placeholder="Explain your approach to handling difficult situations..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="staff-availability" class="required-field">How many hours per week can you dedicate to moderating?</label>
+                        <input type="text" id="staff-availability" placeholder="e.g., 10-15 hours per week" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="staff-strengths" class="required-field">What are your biggest strengths that would help you as a staff member?</label>
+                        <textarea id="staff-strengths" placeholder="Communication, problem-solving, patience, etc..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="staff-improvement" class="required-field">What area do you think you need to improve on the most?</label>
+                        <textarea id="staff-improvement" placeholder="Be honest about areas you're working on..." required></textarea>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">Submit Application</button>
+            </form>
+
+            <div id="staff-status"></div>
+        </div>
+    </div>
+
+    <div id="promotion-page" class="page">
+        <div class="container">
+            <button onclick="showPage('landing-page')" class="back-btn">Back to Portal</button>
+            
+            <div class="header-decoration promotion-header">
+                <h1>Promotion Application</h1>
+            </div>
+
+            <div class="notice">
+                This application is for current staff members only. If you are not currently a staff member, please use the Staff Application instead.
+            </div>
+
+            <form id="promotionForm">
+                <div class="form-section promotion-form-section">
+                    <div class="form-group">
+                        <label for="promo-dcn" class="required-field">Discord Username</label>
+                        <input type="text" id="promo-dcn" placeholder="username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="currentRole" class="required-field">Current Staff Role</label>
+                        <select id="currentRole" required>
+                            <option value="">Select your current role</option>
+                            <option value="Moderator">Trial Mod</option>
+                            <option value="Senior Moderator">Moderator</option>
+                            <option value="Admin">Trial Admin</option>
+                            <option value="Senior Admin">Administrator</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="desiredRole" class="required-field">Desired Role</label>
+                        <select id="desiredRole" required>
+                            <option value="">Select desired role</option>
+                            <option value="Senior Moderator">Moderator</option>
+                            <option value="Admin">Administrator</option>
+                            <option value="Senior Admin">Head of Staff</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section promotion-form-section">
+                    <div class="form-group">
+                        <label for="timeServed" class="required-field">How long have you been a staff member?</label>
+                        <input type="text" id="timeServed" placeholder="e.g., 6 months, 1 year, etc." required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="achievements" class="required-field">What are your biggest achievements as a staff member?</label>
+                        <textarea id="achievements" placeholder="Describe your accomplishments, successful moderation actions, community contributions..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section promotion-form-section">
+                    <div class="form-group">
+                        <label for="leadership" class="required-field">How have you demonstrated leadership within the staff team?</label>
+                        <textarea id="leadership" placeholder="Examples: training new staff, organizing events, improving processes..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="improvements" class="required-field">What improvements have you made to the server or staff team?</label>
+                        <textarea id="improvements" placeholder="Describe any systems, processes, or features you've helped implement..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section promotion-form-section">
+                    <div class="form-group">
+                        <label for="promo-motivation" class="required-field">Why do you want this promotion?</label>
+                        <textarea id="promo-motivation" placeholder="Explain your motivation and how this role will help you contribute more..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="goals" class="required-field">What are your goals if you receive this promotion?</label>
+                        <textarea id="goals" placeholder="What do you plan to accomplish in this new role?" required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section promotion-form-section">
+                    <div class="form-group">
+                        <label for="promo-availability" class="required-field">How has your availability changed since becoming staff?</label>
+                        <input type="text" id="promo-availability" placeholder="e.g., Increased to 20+ hours per week" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="challenges" class="required-field">What challenges have you faced as staff and how did you overcome them?</label>
+                        <textarea id="challenges" placeholder="Describe difficult situations and your problem-solving approach..." required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="feedback" class="required-field">What feedback have you received from other staff members or users?</label>
+                        <textarea id="feedback" placeholder="Share positive feedback and how you've addressed any concerns..." required></textarea>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn promotion-submit-btn">Submit Promotion Application</button>
+            </form>
+
+            <div id="promotion-status"></div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        document.getElementById('staffForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const statusDiv = document.getElementById('staff-status');
+            statusDiv.textContent = 'Submitting application...';
+            statusDiv.className = 'status-loading';
+            
+            const formData = {
+                discordUsername: document.getElementById('staff-dcn').value,
+                timezone: document.getElementById('staff-timezone').value,
+                experience: document.getElementById('staff-experience').value,
+                motivation: document.getElementById('staff-motivation').value,
+                qualities: document.getElementById('staff-qualities').value,
+                scenario: document.getElementById('staff-scenario').value,
+                availability: document.getElementById('staff-availability').value,
+                strengths: document.getElementById('staff-strengths').value,
+                improvement: document.getElementById('staff-improvement').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            const webhookUrl = 'https://discord.com/api/webhooks/1405214825814036611/Y8FbKJvH6dMs2usoiUJ5BtmuQFXQQSinmyjBHf9Z1dhex-6L4f__xcP2YOC0GK__SQZi';
+            
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    embeds: [{
+                        title: 'New Staff Application',
+                        color: 0x00ff00,
+                        fields: [
+                            {
+                                name: 'Discord Username',
+                                value: formData.discordUsername,
+                                inline: true
+                            },
+                            {
+                                name: 'Timezone',
+                                value: formData.timezone,
+                                inline: true
+                            },
+                            {
+                                name: 'Previous Experience',
+                                value: formData.experience,
+                                inline: false
+                            },
+                            {
+                                name: 'Motivation',
+                                value: formData.motivation,
+                                inline: false
+                            },
+                            {
+                                name: 'Good Staff Qualities',
+                                value: formData.qualities,
+                                inline: false
+                            },
+                            {
+                                name: 'Scenario Response',
+                                value: formData.scenario,
+                                inline: false
+                            },
+                            {
+                                name: 'Availability',
+                                value: formData.availability,
+                                inline: true
+                            },
+                            {
+                                name: 'Strengths',
+                                value: formData.strengths,
+                                inline: false
+                            },
+                            {
+                                name: 'Areas for Improvement',
+                                value: formData.improvement,
+                                inline: false
+                            },
+                            {
+                                name: 'Submitted At',
+                                value: new Date(formData.timestamp).toLocaleString(),
+                                inline: true
+                            }
+                        ],
+                        timestamp: formData.timestamp
+                    }]
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusDiv.textContent = 'Application submitted successfully!';
+                    statusDiv.className = 'status-success';
+                    document.getElementById('staffForm').reset();
+                } else {
+                    throw new Error('Failed to submit');
+                }
+            })
+            .catch(error => {
+                statusDiv.textContent = 'Error submitting application. Please try again.';
+                statusDiv.className = 'status-error';
+                console.error('Error:', error);
+            });
+        });
+
+        document.getElementById('promotionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const statusDiv = document.getElementById('promotion-status');
+            statusDiv.textContent = 'Submitting application...';
+            statusDiv.className = 'status-loading';
+            
+            const formData = {
+                discordUsername: document.getElementById('promo-dcn').value,
+                currentRole: document.getElementById('currentRole').value,
+                desiredRole: document.getElementById('desiredRole').value,
+                timeServed: document.getElementById('timeServed').value,
+                achievements: document.getElementById('achievements').value,
+                leadership: document.getElementById('leadership').value,
+                improvements: document.getElementById('improvements').value,
+                motivation: document.getElementById('promo-motivation').value,
+                goals: document.getElementById('goals').value,
+                availability: document.getElementById('promo-availability').value,
+                challenges: document.getElementById('challenges').value,
+                feedback: document.getElementById('feedback').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            const webhookUrl = 'https://discord.com/api/webhooks/1405214825814036611/Y8FbKJvH6dMs2usoiUJ5BtmuQFXQQSinmyjBHf9Z1dhex-6L4f__xcP2YOC0GK__SQZi';
+            
+            fetch(webhookUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    embeds: [{
+                        title: 'New Promotion Application',
+                        color: 0xffa500,
+                        fields: [
+                            {
+                                name: 'Discord Username',
+                                value: formData.discordUsername,
+                                inline: true
+                            },
+                            {
+                                name: 'Current Role',
+                                value: formData.currentRole,
+                                inline: true
+                            },
+                            {
+                                name: 'Desired Role',
+                                value: formData.desiredRole,
+                                inline: true
+                            },
+                            {
+                                name: 'Time Served',
+                                value: formData.timeServed,
+                                inline: true
+                            },
+                            {
+                                name: 'Achievements',
+                                value: formData.achievements,
+                                inline: false
+                            },
+                            {
+                                name: 'Leadership Experience',
+                                value: formData.leadership,
+                                inline: false
+                            },
+                            {
+                                name: 'Improvements Made',
+                                value: formData.improvements,
+                                inline: false
+                            },
+                            {
+                                name: 'Motivation',
+                                value: formData.motivation,
+                                inline: false
+                            },
+                            {
+                                name: 'Goals',
+                                value: formData.goals,
+                                inline: false
+                            },
+                            {
+                                name: 'Availability',
+                                value: formData.availability,
+                                inline: true
+                            },
+                            {
+                                name: 'Challenges Overcome',
+                                value: formData.challenges,
+                                inline: false
+                            },
+                            {
+                                name: 'Feedback Received',
+                                value: formData.feedback,
+                                inline: false
+                            },
+                            {
+                                name: 'Submitted At',
+                                value: new Date(formData.timestamp).toLocaleString(),
+                                inline: true
+                            }
+                        ],
+                        timestamp: formData.timestamp
+                    }]
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    statusDiv.textContent = 'Promotion application submitted successfully!';
+                    statusDiv.className = 'status-success';
+                    document.getElementById('promotionForm').reset();
+                } else {
+                    throw new Error('Failed to submit');
+                }
+            })
+            .catch(error => {
+                statusDiv.textContent = 'Error submitting application. Please try again.';
+                statusDiv.className = 'status-error';
+                console.error('Error:', error);
+            });
+        });
+    </script>
+
+</body>
+</html>
