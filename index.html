@@ -4,7 +4,6 @@
 <head>
     <title>Application Portal</title>
     
-    <!-- Discord Embed Meta Tags -->
     <meta property="og:title" content="Application Portal">
     <meta property="og:description" content="Submit staff and promotion applications for our The Vault Scripts">
     <meta property="og:type" content="website">
@@ -387,7 +386,6 @@
 </head>
 <body>
 
-    <!-- Landing Page -->
     <div id="landing-page" class="page active">
         <div class="container landing-container">
             <h1>Application Portal</h1>
@@ -409,7 +407,6 @@
         </div>
     </div>
 
-    <!-- Staff Application Page -->
     <div id="staff-page" class="page">
         <div class="container">
             <button onclick="showPage('landing-page')" class="back-btn">Back to Portal</button>
@@ -580,6 +577,7 @@
         </div>
     </div>
 
+    <script src="config.js"></script>
     <script>
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
@@ -589,8 +587,36 @@
             document.getElementById(pageId).classList.add('active');
         }
 
+        // Rate limiting to prevent spam
+        let lastSubmission = 0;
+        const SUBMISSION_COOLDOWN = 30000; // 30 seconds
+
+        function canSubmit() {
+            const now = Date.now();
+            if (now - lastSubmission < SUBMISSION_COOLDOWN) {
+                return false;
+            }
+            lastSubmission = now;
+            return true;
+        }
+
+        // Simple validation
+        function validateForm(formData) {
+            for (let key in formData) {
+                if (!formData[key] || formData[key].trim() === '') {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         document.getElementById('staffForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            if (!canSubmit()) {
+                alert('Please wait 30 seconds between submissions.');
+                return;
+            }
             
             const statusDiv = document.getElementById('staff-status');
             statusDiv.textContent = 'Submitting application...';
@@ -609,7 +635,13 @@
                 timestamp: new Date().toISOString()
             };
             
-            const webhookUrl = 'https://discord.com/api/webhooks/1405214825814036611/Y8FbKJvH6dMs2usoiUJ5BtmuQFXQQSinmyjBHf9Z1dhex-6L4f__xcP2YOC0GK__SQZi';
+            if (!validateForm(formData)) {
+                statusDiv.textContent = 'Please fill in all required fields.';
+                statusDiv.className = 'status-error';
+                return;
+            }
+            
+            const webhookUrl = CONFIG.WEBHOOK_URL;
             
             fetch(webhookUrl, {
                 method: 'POST',
@@ -695,6 +727,11 @@
         document.getElementById('promotionForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
+            if (!canSubmit()) {
+                alert('Please wait 30 seconds between submissions.');
+                return;
+            }
+            
             const statusDiv = document.getElementById('promotion-status');
             statusDiv.textContent = 'Submitting application...';
             statusDiv.className = 'status-loading';
@@ -715,7 +752,13 @@
                 timestamp: new Date().toISOString()
             };
             
-            const webhookUrl = 'https://discord.com/api/webhooks/1405214825814036611/Y8FbKJvH6dMs2usoiUJ5BtmuQFXQQSinmyjBHf9Z1dhex-6L4f__xcP2YOC0GK__SQZi';
+            if (!validateForm(formData)) {
+                statusDiv.textContent = 'Please fill in all required fields.';
+                statusDiv.className = 'status-error';
+                return;
+            }
+            
+            const webhookUrl = CONFIG.WEBHOOK_URL;
             
             fetch(webhookUrl, {
                 method: 'POST',
