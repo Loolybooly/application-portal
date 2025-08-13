@@ -579,6 +579,12 @@
 
     <script src="config.js"></script>
     <script>
+        // Debug: Check if CONFIG is loaded
+        console.log('CONFIG loaded:', typeof CONFIG !== 'undefined');
+        if (typeof CONFIG !== 'undefined') {
+            console.log('Webhook URL:', CONFIG.WEBHOOK_URL);
+        }
+        
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
                 page.classList.remove('active');
