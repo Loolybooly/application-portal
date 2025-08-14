@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>Application Portal</title>
+    
+    <!-- Discord Embed Meta Tags -->
     <meta property="og:title" content="Application Portal">
     <meta property="og:description" content="Submit staff and promotion applications for our The Vault Scripts">
     <meta property="og:type" content="website">
@@ -578,7 +580,6 @@
         </div>
     </div>
 
-    <script src="config.js"></script>
     <script>
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
@@ -608,13 +609,7 @@
                 timestamp: new Date().toISOString()
             };
             
-            const webhookUrl = getWebhookUrl();
-            
-            if (!webhookUrl) {
-                statusDiv.textContent = 'Configuration error. Please contact an administrator.';
-                statusDiv.className = 'status-error';
-                return;
-            }
+            const webhookUrl = 'https://discord.com/api/webhooks/1405214825814036611/Y8FbKJvH6dMs2usoiUJ5BtmuQFXQQSinmyjBHf9Z1dhex-6L4f__xcP2YOC0GK__SQZi';
             
             fetch(webhookUrl, {
                 method: 'POST',
@@ -720,13 +715,7 @@
                 timestamp: new Date().toISOString()
             };
             
-            const webhookUrl = getWebhookUrl();
-            
-            if (!webhookUrl) {
-                statusDiv.textContent = 'Configuration error. Please contact an administrator.';
-                statusDiv.className = 'status-error';
-                return;
-            }
+            const webhookUrl = 'https://discord.com/api/webhooks/1405214825814036611/Y8FbKJvH6dMs2usoiUJ5BtmuQFXQQSinmyjBHf9Z1dhex-6L4f__xcP2YOC0GK__SQZi';
             
             fetch(webhookUrl, {
                 method: 'POST',
